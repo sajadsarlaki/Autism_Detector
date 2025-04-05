@@ -10,6 +10,6 @@
 #SBATCH --cpus-per-task=2              # Number of CPUs per task
 # Activate conda environment
 source ~/miniforge3/bin
-# conda activate final_project
+conda activate final_project
 cd ~/software/src/enel645_project/
 python project.py
