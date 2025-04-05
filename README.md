@@ -55,18 +55,19 @@ Images should be in standard formats such as `.jpg` or `.png`, and placed in the
 
 Average performance from k-fold cross-validation and final test evaluation:
 
-- **Accuracy:** _[Insert your result]_  
-- **Precision:** _[Insert your result]_  
-- **Recall:** _[Insert your result]_  
-- **F1 Score:** _[Insert your result]_  
-- **AUC-ROC:** _[Insert your result]_  
+- **Accuracy:** 
+- **Precision:** 
+- **Recall:** 
+- **F1 Score:** 
+- **AUC-ROC:** 
 
 (Replace these with your actual values printed at the end of `project.py`)
 
 ## Authors
 
-- [Your Name]  
-- [Teammate's Name]  
+Saba Soghraty
+Samin Hazeri
+
 
 ## Disclaimer
 
