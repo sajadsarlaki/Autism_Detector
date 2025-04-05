@@ -69,6 +69,7 @@ def process_images(image_paths, augment=False):
     return np.array([preprocess_image(p, augment) for p in image_paths])
 
 # Model Definition
+# Freeze the base model layers and add custom layers
 
 def build_model(hp):
     base_model = VGG16(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
@@ -88,7 +89,7 @@ def build_model(hp):
     )
     return model
 
-# === Load Data
+# Load Data
 
 dataset_dir = '/home/reyhaneh.farahmand/software/src/enel645_project/AutismDataset/AutismDataset'
 (train_paths, train_labels), (test_paths, test_labels), (valid_paths, valid_labels) = load_dataset(dataset_dir)
@@ -97,10 +98,10 @@ train_paths, train_labels = shuffle(train_paths, train_labels, random_state=42)
 test_paths, test_labels = shuffle(test_paths, test_labels, random_state=42)
 valid_paths, valid_labels = shuffle(valid_paths, valid_labels, random_state=42)
 
-# === Hyperparameter Tuning with KerasTuner ===
+# Hyperparameter Tuning with KerasTuner 
 
 X_train_tune = process_images(train_paths[:500], augment=True)
-y_train_tune = train_labels[:500]  # For faster tuning, use a subset
+y_train_tune = train_labels[:500] 
 
 tuner = kt.RandomSearch(
     build_model,
@@ -119,7 +120,7 @@ print(f"Learning Rate: {best_hp.get('learning_rate')}")
 print(f"Dense Units: {best_hp.get('dense_units')}")
 print(f"Dropout Rate: {best_hp.get('dropout_rate')}")
 
-# === K-Fold Cross-Validation ===
+#  K-Fold Cross-Validation 
 
 kf = KFold(n_splits=3, shuffle=True, random_state=42)
 X_train_all = process_images(train_paths)
@@ -158,7 +159,6 @@ for fold, (train_idx, val_idx) in enumerate(kf.split(X_train_all)):
     f1_list.append(f1_score(y_fold_val, y_pred_label))
     roc_auc_list.append(roc_auc_score(y_fold_val, y_pred))
 
-# === Report K-Fold Results ===
 
 print("\nK-Fold Cross-Validation Results:")
 print(f"Accuracy: {np.mean(accuracy_list):.4f}")
@@ -167,13 +167,13 @@ print(f"Recall: {np.mean(recall_list):.4f}")
 print(f"F1 Score: {np.mean(f1_list):.4f}")
 print(f"AUC-ROC: {np.mean(roc_auc_list):.4f}")
 
-# === Final Model Training & Test Evaluation ===
+# Final Model Evaluation 
 
 final_model = build_model(best_hp)
 final_model.fit(
     X_train_all, y_train_all,
-    epochs=10,
-    batch_size=16,
+    epochs=5,
+    batch_size=8,
     validation_split=0.1,
     callbacks=[EarlyStopping(patience=3, restore_best_weights=True)],
     verbose=1
