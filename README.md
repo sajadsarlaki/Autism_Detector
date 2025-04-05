@@ -21,29 +21,54 @@ The dataset must be structured as follows:
 dataset/ ├── train/ │ ├── Autistic/ │ └── Non_Autistic/ ├── valid/ │ ├── Autistic/ │ └── Non_Autistic/ ├── test/ │ ├── Autistic/ │ └── Non_Autistic/
 
 
-Images are expected to be in standard formats (e.g., `.jpg`, `.png`) and labeled by folder name.
+Images should be in standard formats such as `.jpg` or `.png`, and placed in the appropriate folder.
 
 ## Key Features
 
-- **Image Preprocessing:** Includes resizing, normalization, and augmentation (flip, rotation, brightness/contrast, CLAHE, etc.) using Albumentations.
-- **Model Tuning:** Optimizes learning rate, dense layer size, and dropout rate using Keras Tuner.
-- **Cross-Validation:** 3-fold cross-validation to ensure model generalization.
-- **Metrics Used:** Accuracy, Precision, Recall, F1 Score, and AUC-ROC.
+- **Image Preprocessing:** Includes resizing, normalization, and augmentation (flip, rotation, brightness/contrast, CLAHE, etc.) using Albumentations.  
+- **Model Tuning:** Optimizes learning rate, dense layer size, and dropout rate using Keras Tuner.  
+- **Cross-Validation:** 3-fold cross-validation to ensure model generalization.  
+- **Metrics Used:** Accuracy, Precision, Recall, F1 Score, and AUC-ROC.  
 
 ## How to Run
 
 1. Install required packages:
-   ```bash
-   pip install tensorflow keras keras-tuner albumentations opencv-python scikit-learn
-2.Prepare your dataset according to the directory structure shown above.
+    ```bash
+    pip install tensorflow keras keras-tuner albumentations opencv-python scikit-learn
+    ```
 
-3.Set the correct path to your dataset:
-dataset_dir = '/path/to/your/AutismDataset'
+2. Prepare your dataset according to the structure shown above.
 
-4.Run project.py. This will:
+3. Set the correct path to your dataset:
+    ```python
+    dataset_dir = '/path/to/your/AutismDataset'
+    ```
 
-Load and preprocess the data
-Perform hyperparameter tuning
-Conduct k-fold training
-Evaluate on the test set
-Save the final trained model as autism_final_model.h5
+4. Run `project.py`. This will:
+    - Load and preprocess the data  
+    - Perform hyperparameter tuning  
+    - Conduct k-fold training  
+    - Evaluate on the test set  
+    - Save the final trained model as `autism_final_model.h5`  
+
+## Results
+
+Average performance from k-fold cross-validation and final test evaluation:
+
+- **Accuracy:** _[Insert your result]_  
+- **Precision:** _[Insert your result]_  
+- **Recall:** _[Insert your result]_  
+- **F1 Score:** _[Insert your result]_  
+- **AUC-ROC:** _[Insert your result]_  
+
+(Replace these with your actual values printed at the end of `project.py`)
+
+## Authors
+
+- [Your Name]  
+- [Teammate's Name]  
+
+## Disclaimer
+
+This project is intended for academic and research purposes only. It is not intended for clinical diagnosis or real-world medical use.
+
